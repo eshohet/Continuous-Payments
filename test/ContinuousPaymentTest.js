@@ -6,6 +6,10 @@ contract('ContinuousPayment', async ([contractor, employer]) => {
 
     beforeEach(async () => {
         contract = await ContinuousPayment.new(1, {from: contractor});
+        contract.depositPayment({
+            from: employer,
+            value: 3000
+        }); 
     });
 
     it("Test", async () => {
