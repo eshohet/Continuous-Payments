@@ -1,14 +1,14 @@
 let ContinuousPayment = artifacts.require('./ContinuousPayment.sol');
 
-contract('ContinuousPayment', async function ([contractor, employer]) {
+contract('ContinuousPayment', async ([contractor, employer]) => {
 
     let contract;
 
     beforeEach(async () => {
-        contract = await ContinuousPayment.new(weiPerSecond, {from: contractor});
+        contract = await ContinuousPayment.new(1, {from: contractor});
     });
 
-    it("Fuck", async () => {
+    it("Test", async () => {
 
     });
 });
