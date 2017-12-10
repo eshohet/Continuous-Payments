@@ -1,4 +1,4 @@
-pragma solidity ^0.4.2;
+pragma solidity ^0.4.15;
 
 contract ContinuousPayment {
 
@@ -6,6 +6,7 @@ contract ContinuousPayment {
     address public employer;
     uint public weiPerSecond;
     uint public startTime;
+    uint public time;
 
     function ContinuousPayment(uint _weiPerSecond) {
         weiPerSecond = _weiPerSecond;
@@ -23,7 +24,7 @@ contract ContinuousPayment {
 
     function withdrawPayment() {
         uint owed = balanceOwed();
-        startTime = now;
+        startTime = getTime();
         if (contractor == msg.sender) {
             contractor.transfer(owed);
         }
@@ -35,6 +36,10 @@ contract ContinuousPayment {
 
     function balanceOwed() constant returns(uint) {
         return weiPerSecond * (now - startTime);
+    }
+
+    function getTime() constant returns (uint) {
+        return time;
     }
 
 
