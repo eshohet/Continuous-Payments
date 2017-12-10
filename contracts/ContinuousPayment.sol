@@ -6,7 +6,6 @@ contract ContinuousPayment {
     address public employer;
     uint public weiPerSecond;
     uint public startTime;
-    uint public time;
 
     function ContinuousPayment(uint _weiPerSecond) {
         weiPerSecond = _weiPerSecond;
@@ -19,7 +18,7 @@ contract ContinuousPayment {
 
     function depositPayment () payable {
         employer = msg.sender;
-        startTime = now;
+        startTime = getTime();
     }
 
     function withdrawPayment() {
@@ -35,11 +34,11 @@ contract ContinuousPayment {
     }
 
     function balanceOwed() constant returns(uint) {
-        return weiPerSecond * (now - startTime);
+        return weiPerSecond * (getTime() - startTime);
     }
 
     function getTime() constant returns (uint) {
-        return time;
+        return now;
     }
 
 
