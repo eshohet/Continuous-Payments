@@ -1,5 +1,6 @@
 pragma solidity ^0.4.15;
 
+
 contract ContinuousPayment {
 
     address public contractor;
@@ -14,11 +15,11 @@ contract ContinuousPayment {
         contractor = msg.sender;
     }
 
-    function () payable {
+    function() payable {
         depositPayment();
     }
 
-    function depositPayment () payable {
+    function depositPayment() payable {
         employer = msg.sender;
         startTime = getTime();
     }
@@ -39,21 +40,17 @@ contract ContinuousPayment {
         }
     }
 
-    function balanceOwed() constant returns(uint) {
+    function balanceOwed() constant returns (uint) {
         uint owed = weiPerSecond * (getTime() - startTime);
         uint balance = address(this).balance;
-        if(owed > balance) {
+        if (owed > balance) {
             owed = balance;
         }
 
         return owed;
-
     }
 
     function getTime() constant returns (uint) {
         return now;
     }
-
-
-
 }

@@ -1,7 +1,7 @@
 let ContinuousPayment = artifacts.require('./ContinuousPaymentMock.sol')
 
 contract('ContinuousPayment', async ([contractor, employer, controller]) => {
-  let contract, events, watcher
+  let contract
   const weiPerSecond = web3.toWei(1, 'wei')
 
   beforeEach(async () => {
@@ -11,12 +11,6 @@ contract('ContinuousPayment', async ([contractor, employer, controller]) => {
       value: web3.toWei(10, 'wei')
     })
 
-  })
-
-  afterEach(async () => {
-    if (watcher) {
-      watcher.stopWatching()
-    }
   })
 
   it('Drain contract by contractor after expiration of contract', async () => {
