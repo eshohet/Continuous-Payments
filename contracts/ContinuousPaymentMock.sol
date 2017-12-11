@@ -10,7 +10,7 @@ contract ContinuousPaymentMock is ContinuousPayment{
 
     }
 
-    function getTime() {
+    function getTime() constant returns(uint) {
         return time;
     }
 
