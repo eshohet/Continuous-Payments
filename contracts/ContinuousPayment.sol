@@ -7,6 +7,8 @@ contract ContinuousPayment {
     uint public weiPerSecond;
     uint public startTime;
 
+    event Withdrew(uint amount, address indexed withdrawer);
+
     function ContinuousPayment(uint _weiPerSecond) {
         weiPerSecond = _weiPerSecond;
         contractor = msg.sender;
@@ -27,11 +29,13 @@ contract ContinuousPayment {
         if (contractor == msg.sender) {
             require(owed > 0);
             contractor.transfer(owed);
+            Withdrew(owed, msg.sender);
         }
         if (employer == msg.sender) {
             uint employerOwed = address(this).balance - owed;
             require(employerOwed > 0);
             employer.transfer(employerOwed);
+            Withdrew(employerOwed, msg.sender);
         }
     }
 
