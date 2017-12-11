@@ -46,7 +46,6 @@ contract ContinuousPayment {
         if (owed > balance) {
             owed = balance;
         }
-
         return owed;
     }
 
