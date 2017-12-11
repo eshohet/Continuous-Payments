@@ -25,10 +25,12 @@ contract ContinuousPayment {
         uint owed = balanceOwed();
         startTime = getTime();
         if (contractor == msg.sender) {
+            require(owed > 0);
             contractor.transfer(owed);
         }
         if (employer == msg.sender) {
             uint employerOwed = address(this).balance - owed;
+            require(employerOwed > 0);
             employer.transfer(employerOwed);
         }
     }
