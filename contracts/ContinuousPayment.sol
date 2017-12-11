@@ -34,7 +34,14 @@ contract ContinuousPayment {
     }
 
     function balanceOwed() constant returns(uint) {
-        return weiPerSecond * (getTime() - startTime);
+        uint owed = weiPerSecond * (getTime() - startTime);
+        uint balance = address(this).balance;
+        if(owed > balance) {
+            owed = balance;
+        }
+
+        return owed;
+
     }
 
     function getTime() constant returns (uint) {
