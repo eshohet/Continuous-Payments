@@ -1,5 +1,6 @@
 pragma solidity ^0.4.15;
 
+//TODO: Allow the contract to be reused
 
 contract ContinuousPayment {
 
@@ -20,6 +21,7 @@ contract ContinuousPayment {
     }
 
     function depositPayment() payable {
+        require(employer == 0x0); //don't allow this to be set twice
         employer = msg.sender;
         startTime = getTime();
     }
@@ -49,6 +51,7 @@ contract ContinuousPayment {
         return owed;
     }
 
+    //overridden in test files
     function getTime() constant returns (uint) {
         return now;
     }
